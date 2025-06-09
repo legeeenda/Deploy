@@ -72,7 +72,16 @@ export default function Statistics() {
   );
 }
 
-const styles = {
+const styles: {
+  container: React.CSSProperties;
+  header: React.CSSProperties;
+  table: React.CSSProperties;
+  th: React.CSSProperties;
+  tr: React.CSSProperties;
+  td: React.CSSProperties;
+  navigateButton: React.CSSProperties;
+  navigateButtonHover: React.CSSProperties;
+} = {
   container: {
     display: "flex",
     flexDirection: "column",
@@ -125,3 +134,4 @@ const styles = {
     backgroundColor: "#0056b3",
   },
 };
+
