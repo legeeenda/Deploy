@@ -215,18 +215,17 @@ export default function HomeworkTask() {
               </p>
               <p>
                 <strong>Статус:</strong>{" "}
-                {studentResponses?.status === "Сдано"
+                studentResponses[0]?.status === "Сдано"
                   ? "Сдано"
                   : "Ожидание проверки"}
               </p>
-              {studentResponses?.grade ? (
+              {studentResponses[0]?.grade ? (
                 <>
                   <p>
-                    <strong>Оценка:</strong> {studentResponses.grade}
+                    <strong>Оценка:</strong> {studentResponses[0].grade}
                   </p>
                   <p>
-                    <strong>Баллы:</strong>{" "}
-                    {studentResponses.calculated_points}
+                    <strong>Баллы:</strong> {studentResponses[0].calculated_points}
                   </p>
                 </>
               ) : (
