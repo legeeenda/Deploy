@@ -176,7 +176,6 @@ function AddTaskForm({ onAddTask }: { onAddTask: (task: Task) => void }) {
       description,
       points,
       deadline,
-      task: taskContent,
     };
     onAddTask(newTask);
   };
