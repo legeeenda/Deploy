@@ -215,10 +215,13 @@ export default function HomeworkTask() {
               </p>
               <p>
                 <strong>Статус:</strong>{" "}
-                studentResponses[0]?.status === "Сдано"
-                  ? "Сдано"
-                  : "Ожидание проверки"}
+                {
+                  studentResponses[0]?.status === "Сдано"
+                    ? "Сдано"
+                    : "Ожидание проверки"
+                }
               </p>
+
               {studentResponses[0]?.grade ? (
                 <>
                   <p>
