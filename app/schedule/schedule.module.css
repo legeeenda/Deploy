@@ -1,0 +1,73 @@
+.scheduleContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 30px;
+  background-color: #f9fafb;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.dayBlock {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dayBlock h2 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  color: #111827;
+}
+
+.dayBlock ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dayBlock li {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #374151;
+}
+
+.dayBlock li strong {
+  display: inline-block;
+  width: 70px;
+  color: #2563eb;
+}
+
+.navigateButton {
+  margin: 30px auto 0;
+  display: block;
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.navigateButton:hover {
+  background-color: #1e3a8a;
+}
+
+/* Центрирование последнего дня */
+.scheduleContainer > :nth-child(7) {
+  grid-column: 2 / span 1;
+}
+.scheduleTitle {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 20px;
+  color: #1f2937;
+}
