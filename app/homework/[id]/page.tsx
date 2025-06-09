@@ -72,7 +72,8 @@ export default function HomeworkTask() {
           console.error("Ошибка загрузки ответа студента:", responseError);
         } else {
           setSavedAnswer(responseData?.response || null);
-          setStudentResponses(responseData); // Сохраняем данные об оценке
+          setStudentResponses([responseData]); // ✅ Оборачиваем в массив
+
         }
       } else if (role === "teacher") {
         const { data: responsesData, error: responsesError } = await supabase
