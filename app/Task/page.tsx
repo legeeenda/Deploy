@@ -10,9 +10,11 @@ interface Task {
   id?: number;
   title: string;
   description: string;
+  task: string; // ← обязательное поле!
   points: number;
   deadline: string;
 }
+
 
 export default function HomeworkList() {
   const [tasks, setTasks] = useState<Task[]>([]);
