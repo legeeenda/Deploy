@@ -16,25 +16,23 @@ export default function Statistics() {
     fetchStudents();
   }, []);
 
-async function fetchStudents() {
-  try {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("students")
-      .select("*")
-      .order("scores", { ascending: false });
+  async function fetchStudents() {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("students")
+        .select("*")
+        .neq("role", "teacher")
+        .order("scores", { ascending: false });
 
-    if (error) throw error;
-
-    const filtered = data.filter((student: any) => student.role !== "teacher");
-    setStudents(filtered);
-  } catch (error: any) {
-    console.error("Ошибка загрузки данных:", error.message);
-  } finally {
-    setLoading(false);
+      if (error) throw error;
+      setStudents(data);
+    } catch (error: any) {
+      console.error("Ошибка загрузки данных:", error.message);
+    } finally {
+      setLoading(false);
+    }
   }
-}
-
 
   return (
     <div style={styles.container}>
