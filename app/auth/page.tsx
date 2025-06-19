@@ -12,12 +12,6 @@ export default function TestPage() {
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
     const supabase = createClient();
-
-
-
-
-
-
     const handleLogin = async () => {
         const { data, error } = await supabase.auth.signInWithPassword({
             email,

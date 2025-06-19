@@ -74,3 +74,39 @@ p {
 .navigate-button:hover {
   background-color: #1d4ed8;
 }
+/* style.css дополнение */
+
+.button-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.quarter-button {
+  padding: 10px 20px;
+  background-color: #e5e7eb;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.quarter-button:hover,
+.quarter-button.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.quarter-description {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}

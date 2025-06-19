@@ -1,31 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "../../utils/supabase/client";
-
 import Head from "next/head";
 import "../edu/styl/style.css";
 
-const supabase = createClient();
-
 export default function Home() {
-  const [studyPlan, setStudyPlan] = useState([]);
-  const router = useRouter(); 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("study_plan")
-        .select("*");
+  const router = useRouter();
+  const [selectedQuarter, setSelectedQuarter] = useState(null);
 
-      if (error) {
-        console.error("Ошибка загрузки данных:", error);
-      } else {
-        setStudyPlan(data);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const plan = {
+    "Месяц 1-3": "Изучаем основы программирования на C++, переменные, циклы, условия, функции.",
+    "Месяц 4-6": "Переходим к веб-разработке: HTML, CSS, JavaScript. Создаём простые сайты.",
+    "Месяц 7-9": "Знакомимся с фреймворками: React, Node.js. Учимся строить SPA приложения.",
+    "Месяц 10-12": "Углубляемся в искусственный интеллект и машинное обучение на Python, основы нейросетей."
+  };
 
   return (
     <div>
@@ -33,29 +21,38 @@ export default function Home() {
         <title>План Изучения Языков Программирования</title>
         <meta
           name="description"
-          content="Мой план изучения языков программирования на год."
+          content="Годовой план изучения языков программирования с разбивкой по кварталам."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1>План Изучения Языков Программирования</h1>
+        <h1>Годовой План Изучения Программирования</h1>
 
-        <ul>
-          {studyPlan.map((item) => (
-            <li key={item.id}>
-              <h2>{item.month}</h2>
-              <h3>{item.language}</h3>
-              <p>{item.description}</p>
-            </li>
+        <p style={{ textAlign: "center", fontSize: "18px", marginBottom: "30px" }}>
+          В первые месяцы изучаем C++, затем переходим к вебу и завершаем искусственным интеллектом.
+        </p>
+
+        <div className="button-grid">
+          {Object.keys(plan).map((quarter) => (
+            <button
+              key={quarter}
+              className={`quarter-button ${selectedQuarter === quarter ? "active" : ""}`}
+              onClick={() => setSelectedQuarter(quarter)}
+            >
+              {quarter}
+            </button>
           ))}
-        </ul>
+        </div>
 
-        {}
-        <button
-          onClick={() => router.push("/main")} 
-          className="navigate-button"
-        >
+        {selectedQuarter && (
+          <div className="quarter-description">
+            <h2>{selectedQuarter}</h2>
+            <p>{plan[selectedQuarter]}</p>
+          </div>
+        )}
+
+        <button onClick={() => router.push("/main")} className="navigate-button">
           Перейти на Главную страницу
         </button>
       </main>
@@ -64,3 +61,4 @@ export default function Home() {
     </div>
   );
 }
+

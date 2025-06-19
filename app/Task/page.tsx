@@ -171,13 +171,15 @@ function AddTaskForm({ onAddTask }: { onAddTask: (task: Task) => void }) {
       return;
     }
 
-    const newTask: Task = {
+    const newTask: Task & { task: string } = {
       title,
       description,
+      task: taskContent,  // ← обязательно!
       points,
       deadline,
     };
     onAddTask(newTask);
+
   };
 
   return (
