@@ -1,39 +1,40 @@
-"use client"; 
+"use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-
 export default function Statistics() {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const router = useRouter(); // Инициализация useRouter
+  const router = useRouter();
 
   useEffect(() => {
     fetchStudents();
   }, []);
 
-  async function fetchStudents() {
-    try {
-      setLoading(true);
+async function fetchStudents() {
+  try {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("students")
+      .select("*")
+      .order("scores", { ascending: false });
 
-      const { data, error } = await supabase
-        .from("students")
-        .select("*")
-        .order("scores", { ascending: false });
-      if (error) throw error;
-      setStudents(data);
-    } catch (error) {
-      console.error("Ошибка загрузки данных:", error.message);
-    } finally {
-      setLoading(false);
-    }
+    if (error) throw error;
+
+    const filtered = data.filter((student: any) => student.role !== "teacher");
+    setStudents(filtered);
+  } catch (error: any) {
+    console.error("Ошибка загрузки данных:", error.message);
+  } finally {
+    setLoading(false);
   }
+}
+
 
   return (
     <div style={styles.container}>
@@ -60,8 +61,6 @@ export default function Statistics() {
           </tbody>
         </table>
       )}
-
-      {/* Добавление кнопки навигации */}
       <button
         style={styles.navigateButton}
         onClick={() => router.push("/main")}
@@ -134,4 +133,3 @@ const styles: {
     backgroundColor: "#0056b3",
   },
 };
-
